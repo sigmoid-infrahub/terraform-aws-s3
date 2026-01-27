@@ -1,0 +1,18 @@
+{
+    "resourceSpecId": "e3e3e3e3-e3e3-4e3e-8e3e-e3e3e3e3e3e3",
+    "stableId": "logs-bucket",
+    "displayName": "Logs Bucket",
+    "resourceType": "storage.s3",
+    "status": "draft",
+    "inputs": {
+        "bucket": "sigmoid-logs-bucket",
+        "versioning": { "enabled": true },
+        "force_destroy": false
+    },
+    "position": { "x": 520, "y": 0 },
+    "terraform": {
+        "module": {
+            "source": "../../terraform-modules/terraform-aws-s3"
+        }
+    }
+}

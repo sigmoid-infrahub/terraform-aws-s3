@@ -2,13 +2,22 @@
     "resourceSpecId": "e3e3e3e3-e3e3-4e3e-8e3e-e3e3e3e3e3e3",
     "stableId": "logs-bucket",
     "displayName": "Logs Bucket",
+    "category": "storage",
+    "iconUrl": "https://cdn.sigmoid.us/icons/aws/full-size/svg/storage/s3.svg",
     "resourceType": "storage.s3",
+    "vpcDependency": "none",
     "status": "draft",
     "inputs": {
         "bucket": "sigmoid-logs-bucket",
-        "versioning": { "enabled": true },
+        "versioning": false,
         "force_destroy": false
     },
+    "inputSpecs": [
+        { "name": "bucket", "type": "string", "required": true },
+        { "name": "acl", "type": "string", "required": false },
+        { "name": "versioning", "type": "boolean", "required": false, "default": false },
+        { "name": "force_destroy", "type": "boolean", "required": false, "default": false }
+    ],
     "position": { "x": 520, "y": 0 },
     "terraform": {
         "module": {

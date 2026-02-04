@@ -4,9 +4,9 @@ variable "bucket" {
 }
 
 variable "versioning" {
-  type        = any
-  description = "Versioning configuration"
-  default     = null
+  type        = bool
+  description = "Enable versioning"
+  default     = false
 }
 
 variable "force_destroy" {

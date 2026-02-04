@@ -3,5 +3,5 @@ locals {
     ManagedBy = "sigmoid"
   }, var.tags)
 
-  versioning_status = var.versioning == null ? null : (try(var.versioning.enabled, false) ? "Enabled" : "Suspended")
+  versioning_status = var.versioning ? "Enabled" : "Suspended"
 }

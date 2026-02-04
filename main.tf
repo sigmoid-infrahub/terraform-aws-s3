@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "this" {
 }
 
 resource "aws_s3_bucket_versioning" "this" {
-  count  = local.versioning_status == null ? 0 : 1
+  count  = var.versioning ? 1 : 0
   bucket = aws_s3_bucket.this.id
 
   versioning_configuration {

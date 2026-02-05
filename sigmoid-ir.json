@@ -7,21 +7,11 @@
     "resourceType": "storage.s3",
     "vpcDependency": "none",
     "status": "draft",
-    "inputs": {
-        "bucket": "sigmoid-logs-bucket",
-        "versioning": false,
-        "force_destroy": false
-    },
-    "inputSpecs": [
-        { "name": "bucket", "type": "string", "required": true },
-        { "name": "acl", "type": "string", "required": false },
-        { "name": "versioning", "type": "boolean", "required": false, "default": false },
-        { "name": "force_destroy", "type": "boolean", "required": false, "default": false }
-    ],
     "position": { "x": 520, "y": 0 },
     "terraform": {
         "module": {
-            "source": "../../terraform-modules/terraform-aws-s3"
+            "source": "github.com/sigmoid-hq/terraform-aws-s3",
+            "ref": "main"
         }
     }
 }

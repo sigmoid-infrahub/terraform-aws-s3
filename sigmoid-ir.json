@@ -13,5 +13,18 @@
             "source": "github.com/sigmoid-hq/terraform-aws-s3",
             "ref": "main"
         }
+    },
+    "pricing": {
+        "awsPricingLookup": {
+            "serviceCode": "AmazonS3",
+            "unit": "per_gb_month",
+            "quantityProperties": ["storage_gb", "estimated_storage_gb"],
+            "quantityDefault": 0,
+            "filters": [
+                { "field": "location", "value": "${location}" },
+                { "field": "productFamily", "defaultValue": "Storage", "required": false },
+                { "field": "storageClass", "defaultValue": "General Purpose", "required": false }
+            ]
+        }
     }
 }

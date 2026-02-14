@@ -25,6 +25,25 @@
                 { "field": "productFamily", "defaultValue": "Storage", "required": false },
                 { "field": "storageClass", "defaultValue": "General Purpose", "required": false }
             ]
+        },
+        "usageProfiles": {
+            "default": "medium",
+            "low": {
+                "storage_gb": 100,
+                "estimated_storage_gb": 100
+            },
+            "medium": {
+                "storage_gb": 1000,
+                "estimated_storage_gb": 1000
+            },
+            "high": {
+                "storage_gb": 10000,
+                "estimated_storage_gb": 10000
+            },
+            "xhigh": {
+                "storage_gb": 100000,
+                "estimated_storage_gb": 100000
+            }
         }
     }
 }

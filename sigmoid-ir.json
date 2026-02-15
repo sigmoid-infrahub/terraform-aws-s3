@@ -45,5 +45,11 @@
                 "estimated_storage_gb": 100000
             }
         }
+    },
+    "easy": {
+        "alias": "File Bucket",
+        "group": "storage-bucket",
+        "priority": 10,
+        "allowedProperties": ["bucket_name", "versioning_enabled", "force_destroy"]
     }
 }

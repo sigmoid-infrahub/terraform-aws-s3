@@ -1,7 +1,7 @@
 {
     "resourceSpecId": "e3e3e3e3-e3e3-4e3e-8e3e-e3e3e3e3e3e3",
     "stableId": "logs-bucket",
-    "displayName": "Logs Bucket",
+    "displayName": "S3 Storage",
     "category": "storage",
     "iconUrl": "https://cdn.sigmoid.us/icons/aws/full-size/svg/storage/s3.svg",
     "resourceType": "storage.s3",

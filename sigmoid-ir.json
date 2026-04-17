@@ -1,0 +1,55 @@
+{
+    "resourceSpecId": "e3e3e3e3-e3e3-4e3e-8e3e-e3e3e3e3e3e3",
+    "stableId": "logs-bucket",
+    "displayName": "S3 Storage",
+    "category": "storage",
+    "iconUrl": "https://cdn.sigmoid.us/icons/aws/full-size/svg/storage/s3.svg",
+    "resourceType": "storage.s3",
+    "vpcDependency": "none",
+    "status": "draft",
+    "position": { "x": 520, "y": 0 },
+    "terraform": {
+        "module": {
+            "source": "github.com/sigmoid-hq/terraform-aws-s3",
+            "ref": "main"
+        }
+    },
+    "pricing": {
+        "awsPricingLookup": {
+            "serviceCode": "AmazonS3",
+            "unit": "per_gb_month",
+            "quantityProperties": ["storage_gb", "estimated_storage_gb"],
+            "quantityDefault": 0,
+            "filters": [
+                { "field": "location", "value": "${location}" },
+                { "field": "productFamily", "defaultValue": "Storage", "required": false },
+                { "field": "storageClass", "defaultValue": "General Purpose", "required": false }
+            ]
+        },
+        "usageProfiles": {
+            "default": "medium",
+            "low": {
+                "storage_gb": 100,
+                "estimated_storage_gb": 100
+            },
+            "medium": {
+                "storage_gb": 1000,
+                "estimated_storage_gb": 1000
+            },
+            "high": {
+                "storage_gb": 10000,
+                "estimated_storage_gb": 10000
+            },
+            "xhigh": {
+                "storage_gb": 100000,
+                "estimated_storage_gb": 100000
+            }
+        }
+    },
+    "easy": {
+        "alias": "File Bucket",
+        "group": "storage-bucket",
+        "priority": 10,
+        "allowedProperties": ["bucket_name", "versioning_enabled", "force_destroy"]
+    }
+}

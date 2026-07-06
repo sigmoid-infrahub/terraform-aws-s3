@@ -124,6 +124,12 @@ variable "bucket_policy" {
   default     = ""
 }
 
+variable "cloudfront_distribution_arns" {
+  type        = list(string)
+  description = "CloudFront distribution ARNs allowed to read objects through Origin Access Control"
+  default     = []
+}
+
 variable "intelligent_tiering" {
   type        = bool
   description = "Enable S3 Intelligent-Tiering for cost optimization"

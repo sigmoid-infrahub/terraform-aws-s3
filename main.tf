@@ -4,9 +4,27 @@ locals {
   ignore_public_acls_effective      = var.block_public_access ? true : var.ignore_public_acls
   restrict_public_buckets_effective = var.block_public_access ? true : var.restrict_public_buckets
   has_access_logs                   = length(trimspace(var.access_logs_target_bucket)) > 0
-  has_bucket_policy                 = length(trimspace(var.bucket_policy)) > 0
-  has_kms_key                       = length(trimspace(var.kms_key_id)) > 0
-  sse_algorithm                     = local.has_kms_key ? "aws:kms" : "AES256"
+  cloudfront_oac_bucket_policy = length(var.cloudfront_distribution_arns) > 0 ? jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AllowCloudFrontServicePrincipalReadOnly"
+        Effect    = "Allow"
+        Principal = { Service = "cloudfront.amazonaws.com" }
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.this.arn}/*"
+        Condition = {
+          StringEquals = {
+            "AWS:SourceArn" = var.cloudfront_distribution_arns
+          }
+        }
+      }
+    ]
+  }) : ""
+  effective_bucket_policy = length(trimspace(var.bucket_policy)) > 0 ? var.bucket_policy : local.cloudfront_oac_bucket_policy
+  has_bucket_policy       = length(trimspace(local.effective_bucket_policy)) > 0
+  has_kms_key             = length(trimspace(var.kms_key_id)) > 0
+  sse_algorithm           = local.has_kms_key ? "aws:kms" : "AES256"
 }
 
 resource "aws_s3_bucket" "this" {
@@ -82,7 +100,7 @@ resource "aws_s3_bucket_cors_configuration" "this" {
 resource "aws_s3_bucket_policy" "this" {
   count  = local.has_bucket_policy ? 1 : 0
   bucket = aws_s3_bucket.this.id
-  policy = var.bucket_policy
+  policy = local.effective_bucket_policy
 
   depends_on = [aws_s3_bucket_public_access_block.this]
 }
